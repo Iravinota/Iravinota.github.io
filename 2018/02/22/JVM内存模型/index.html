@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="java,rmi," />
+  <meta name="keywords" content="java,jvm,内存," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="在分布式系统中，我们需要从客户端调用服务器上的某些服务，让服务器执行某些操作，然后给客户端返回一个结果。Java的RMI是这种分布式调用需求的一种实现方式。它可以实现从一个JVM中调用另一个JVM中的方法，这两个JVM可以在一台机器上，也可以不在一台机器上。">
-<meta name="keywords" content="java,rmi">
+<meta name="description" content="1. 简述不同的硬件和操作系统的内存模型是不一样的，直接使用这个模型进行并发线程执行，可能会出现问题。JVM为了实现在不同操作系统之上的执行一致性，定义了自己的内存模型，以实现一致的并发效果。 JVM内存模型的主要目标就是定义程序中各个变量的访问规则，即在虚拟机中存储变量和读取变量的规则。">
+<meta name="keywords" content="java,jvm,内存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java-rmi简介">
-<meta property="og:url" content="http://iravinota.github.io/2018/02/09/java-rmi简介/index.html">
+<meta property="og:title" content="JVM内存模型">
+<meta property="og:url" content="http://iravinota.github.io/2018/02/22/JVM内存模型/index.html">
 <meta property="og:site_name" content="StepForward">
-<meta property="og:description" content="在分布式系统中，我们需要从客户端调用服务器上的某些服务，让服务器执行某些操作，然后给客户端返回一个结果。Java的RMI是这种分布式调用需求的一种实现方式。它可以实现从一个JVM中调用另一个JVM中的方法，这两个JVM可以在一台机器上，也可以不在一台机器上。">
+<meta property="og:description" content="1. 简述不同的硬件和操作系统的内存模型是不一样的，直接使用这个模型进行并发线程执行，可能会出现问题。JVM为了实现在不同操作系统之上的执行一致性，定义了自己的内存模型，以实现一致的并发效果。 JVM内存模型的主要目标就是定义程序中各个变量的访问规则，即在虚拟机中存储变量和读取变量的规则。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-09T10:55:09.800Z">
+<meta property="og:image" content="http://oqvbykg1g.bkt.clouddn.com/jvm-memory-module.png">
+<meta property="og:updated_time" content="2018-02-24T08:19:15.768Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java-rmi简介">
-<meta name="twitter:description" content="在分布式系统中，我们需要从客户端调用服务器上的某些服务，让服务器执行某些操作，然后给客户端返回一个结果。Java的RMI是这种分布式调用需求的一种实现方式。它可以实现从一个JVM中调用另一个JVM中的方法，这两个JVM可以在一台机器上，也可以不在一台机器上。">
+<meta name="twitter:title" content="JVM内存模型">
+<meta name="twitter:description" content="1. 简述不同的硬件和操作系统的内存模型是不一样的，直接使用这个模型进行并发线程执行，可能会出现问题。JVM为了实现在不同操作系统之上的执行一致性，定义了自己的内存模型，以实现一致的并发效果。 JVM内存模型的主要目标就是定义程序中各个变量的访问规则，即在虚拟机中存储变量和读取变量的规则。">
+<meta name="twitter:image" content="http://oqvbykg1g.bkt.clouddn.com/jvm-memory-module.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://iravinota.github.io/2018/02/09/java-rmi简介/"/>
+  <link rel="canonical" href="http://iravinota.github.io/2018/02/22/JVM内存模型/"/>
 
 
 
 
 
-  <title>java-rmi简介 | StepForward</title>
+  <title>JVM内存模型 | StepForward</title>
   
 
 
@@ -253,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://iravinota.github.io/2018/02/09/java-rmi简介/">
+    <link itemprop="mainEntityOfPage" href="http://iravinota.github.io/2018/02/22/JVM内存模型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eric Wang">
@@ -270,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java-rmi简介</h1>
+          <h1 class="post-title" itemprop="name headline">JVM内存模型</h1>
         
 
         <div class="post-meta">
@@ -282,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-09T18:39:01+08:00">
-                2018-02-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T10:49:51+08:00">
+                2018-02-22
               </time>
             
 
@@ -305,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/文章/" itemprop="url" rel="index">
+                    <span itemprop="name">文章</span>
                   </a>
                 </span>
 
@@ -322,7 +324,7 @@
 
           
           
-             <span id="/2018/02/09/java-rmi简介/" class="leancloud_visitors" data-flag-title="java-rmi简介">
+             <span id="/2018/02/22/JVM内存模型/" class="leancloud_visitors" data-flag-title="JVM内存模型">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -353,32 +355,43 @@
       
 
       
-        <p>在分布式系统中，我们需要从客户端调用服务器上的某些服务，让服务器执行某些操作，然后给客户端返回一个结果。Java的RMI是这种分布式调用需求的一种实现方式。它可以实现从一个JVM中调用另一个JVM中的方法，这两个JVM可以在一台机器上，也可以不在一台机器上。</p>
+        <h1 id="1-简述"><a href="#1-简述" class="headerlink" title="1. 简述"></a>1. 简述</h1><p>不同的硬件和操作系统的内存模型是不一样的，直接使用这个模型进行并发线程执行，可能会出现问题。JVM为了实现在不同操作系统之上的执行一致性，定义了自己的内存模型，以实现一致的并发效果。</p>
+<p>JVM内存模型的主要目标就是定义程序中各个变量的访问规则，即在虚拟机中存储变量和读取变量的规则。</p>
 <a id="more"></a>
-<h1 id="1-定义远程接口"><a href="#1-定义远程接口" class="headerlink" title="1. 定义远程接口"></a>1. 定义远程接口</h1><p>远程对象就是一个远程接口的实现，远程接口就是一个继承了<code>java.rmi.Remote</code>接口的接口，在远程接口中可以定义多个远程方法，每个方法都必须抛出<code>java.rmi.RemoteException</code>异常。</p>
-<p>这里，我们实现了一个IHello远程接口，其远程方法是sayHello()，我们打算让这个远程接口返回一个”Hello, world!”字符串。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example.hello;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.rmi.Remote;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IHello</span> <span class="keyword">extends</span> <span class="title">Remote</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String NAME = <span class="string">"A Say Hello Remote Object"</span>;</span><br><span class="line">    <span class="function">String <span class="title">sayHello</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="2-服务端的实现"><a href="#2-服务端的实现" class="headerlink" title="2. 服务端的实现"></a>2. 服务端的实现</h1><p>服务端需要实现下列功能：</p>
+<h1 id="2-JVM内存模型-–-线程角度"><a href="#2-JVM内存模型-–-线程角度" class="headerlink" title="2. JVM内存模型 – 线程角度"></a>2. JVM内存模型 – 线程角度</h1><p><img src="http://oqvbykg1g.bkt.clouddn.com/jvm-memory-module.png" alt="内存模型"></p>
+<p>这个内存模型主要是从线程的角度来看，每个线程都有自己的独立工作内存。每个线程从主内存中读取变量，在工作内存中对其进行操作，写入时再把变量写入到主内存。</p>
+<p>这个模型有什么用呢？使用这个模型，我们可以方便理解线程之间的交互与锁定。</p>
+<h2 id="2-1-主内存与工作内存的交互以及volatile关键字"><a href="#2-1-主内存与工作内存的交互以及volatile关键字" class="headerlink" title="2.1 主内存与工作内存的交互以及volatile关键字"></a>2.1 主内存与工作内存的交互以及volatile关键字</h2><p>Java内存模型定义了8种操作来完成主内存和工作内存之间的数据传递：</p>
 <ul>
-<li>实现一个实现了IHello接口的类</li>
-<li>启动注册器，使用端口20222</li>
-<li>发布这个类，使用端口20200</li>
-<li>注册这个类，把这个类和一个特定的名字进行绑定</li>
+<li>lock（锁定）：作用于主内存变量，为其加锁，线程独占</li>
+<li>unlock（解除锁定）：作用于主内存中变量，和lock的作用相反</li>
+<li>read(读取)：作用于主内存中变量，从内存中读取变量</li>
+<li>load: 作用于工作内存中的变量，它和read是必须一起出现的</li>
+<li>use: 作用于工作内存中的变量，把工作内存中的变量传递给执行引擎。JVM遇到读取变量指令时，会使用此操作</li>
+<li>assign: 作用于工作内存中的变量，把执行引擎中的变量保存到工作内存。JVM遇到赋值变量指令时，会使用此操作</li>
+<li>store: 作用于工作内存中的变量，把变量传递到主内存。它和write是必须一起出现的</li>
+<li>write: 作用于主内存中变量，把从store得到的变量放入主内存的变量中</li>
 </ul>
-<h2 id="2-1-实现IHello接口"><a href="#2-1-实现IHello接口" class="headerlink" title="2.1 实现IHello接口"></a>2.1 实现IHello接口</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> example.hello.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> example.hello.IHello;</span><br><span class="line"><span class="keyword">import</span> java.rmi.RemoteException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloImpl</span> <span class="keyword">implements</span> <span class="title">IHello</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Server side: Hello, world!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hello, world!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-实现服务器"><a href="#2-2-实现服务器" class="headerlink" title="2.2 实现服务器"></a>2.2 实现服务器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            IHello helloObj = <span class="keyword">new</span> HelloImpl();</span><br><span class="line">            <span class="comment">// Client and Server use this port to communicate</span></span><br><span class="line">            IHello stub = (IHello) UnicastRemoteObject.export(helloObj, <span class="number">20200</span>);</span><br><span class="line">            <span class="comment">// This method call creates and exports a registry on the specified port number. The</span></span><br><span class="line">            <span class="comment">// Server uses this port to regist Name and Object. The Client uses this port to find</span></span><br><span class="line">            <span class="comment">// Object using a specified Name.</span></span><br><span class="line">            Registry registry = LocateRegistry.createRegistry(<span class="number">20222</span>);</span><br><span class="line">            registry.bind(IHello.NAME, stub);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.err.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>启动此服务，即可看到在20222端口监听的注册服务器，以及在20200端口监听的IHello实例。</p>
-<h1 id="3-客户端实现"><a href="#3-客户端实现" class="headerlink" title="3. 客户端实现"></a>3. 客户端实现</h1><p>客户端需实现如下功能：</p>
-<ul>
-<li>从服务器的host:port获取注册服务，此port为服务器启动的注册器所在的端口</li>
-<li>根据名字，查找其对应的对象</li>
-<li>执行此对象的方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Registry registry = LocateRegistry.getRegistry(<span class="string">"localhost"</span>, <span class="number">20222</span>);</span><br><span class="line">            IHello stub = (IHello) registry.lookup(IHello.NAME);</span><br><span class="line">            String retMsg = stub.sayHello();</span><br><span class="line">            System.out.println(<span class="string">"Client receive msg: "</span> + retMsg);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.err.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据名称查找对象时，还可以使用<code>Naming.lookup()</code>函数，不过此时需要传入<code>rmi://host:port/name</code>这样的参数。name中如果有空格，需要用<code>%20</code>代替。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    IHello stub = (IHello) Naming.lookup(<span class="string">"rmi://localhost:20222/A%20Say%20Hello%20Remote%20Object"</span>);</span><br><span class="line">    String retMsg = stub.sayHello();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="4-部署和启动"><a href="#4-部署和启动" class="headerlink" title="4. 部署和启动"></a>4. 部署和启动</h1><p>可以部署在一台机器上，先启动Server，然后在执行Client，即可看到结果。由于Server和Client不在同一个JVM中，所以也相当于是远程通信。</p>
-<p>还可以部署在两台机器上，那时需要修改Client中getRegistry方法的host地址为服务端地址。我没有试这种方法，有条件的同学可以试试。</p>
+<p>理解这这些交互规则，我们就可以理解volatile关键字的作用。所有变量在线程之间传递时，都需要通过主内存进行传递。volatile变量保证在对变量进行assign时，立即更新到主内存，其它线程使用此变量时，需要从主内存中重新read此变量。因此，一个线程对volatile变量的修改，可以 <strong>及时</strong> 被其它线程感知到。</p>
+<p>注意这里的 <strong>及时</strong> ，只有在线程B使用变量时，线程A完成了对此变量的写入，才能被线程B感知到。如果线程A和线程B都read了此变量，线程B的执行引擎对变量操作完成之前，线程A的执行引擎也对此变量进行了操作，然后线程B写入，然后线程A再写入，此时线程B对变量所做的操作就被线程A所覆盖了。所以，这种感知不是实时的。</p>
+<p>那volatile有什么用呢？我们用一段代码来说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">boolean</span> isInit = <span class="keyword">false</span>;</span><br><span class="line"><span class="comment">// 线程A中执行</span></span><br><span class="line"><span class="comment">// 一些初始化操作</span></span><br><span class="line">a = <span class="number">5</span>;</span><br><span class="line">b = <span class="number">6</span>;</span><br><span class="line">isInit = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 线程B中执行</span></span><br><span class="line"><span class="keyword">while</span> (!isInit) &#123;</span><br><span class="line">    Thread.sleep(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面这段代码中，线程B等待线程A初始化完成。线程B每次执行while对isInit进行判断时，都会从主内存中读取其值。当A线程把isInit的值设置为true时，线程B就能及时发现此变量的变动。</p>
+<p>如果isInit不是volatile，则线程B中的isInit有可能在较长时间内都是 <strong>工作内存</strong> 中的值，线程A对isInit值的改变无法被线程B及时感知。</p>
+<p>volatile还有另外一个作用：禁止指令重排序。还是参看上面的例子，CPU在执行指令时，对不相关的指令有可能会乱序执行。比如线程A中的初始化指令，这三条指令都是不相关的，仅对于线程A来说，先执行哪条后执行哪条都是一样的。但是从多线程的角度，我们要求<code>isInit=true</code>必须最后执行。所以我们使用volatile关键字可以禁止指令重排序，保证其执行顺序。</p>
+<h2 id="2-2-原子操作和asynchronized关键字"><a href="#2-2-原子操作和asynchronized关键字" class="headerlink" title="2.2 原子操作和asynchronized关键字"></a>2.2 原子操作和asynchronized关键字</h2><p>在上一节，我们介绍volatile时，说其值的改变能被其它线程 <strong>及时</strong> 感知到，而无法 <strong>实时</strong> 感知到，这是因为对变量的操作不是原子操作。比如<code>a++</code>这个语句，在CPU中会被翻译成多条指令执行，每个指令都有可能被中断，切换到其它线程执行。我们假设其CPU伪指令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">read</span><br><span class="line">load</span><br><span class="line">use</span><br><span class="line">b = a + 1</span><br><span class="line">a = b</span><br><span class="line">assign</span><br><span class="line">store</span><br><span class="line">write</span><br></pre></td></tr></table></figure>
+<p>上面的每条指令都是一个原子操作，即CPU每次都会把一条指令执行完。但在指令之间，有可能发生中断，使得切换到其它线程执行。</p>
+<p>在工作内存与主内存的8个交换操作中，read, load, use, assign, store, write都是原子操作。lock和unlock是在更大尺度上保证原子性，只有一个线程可以对lock的区域进行操作。asynchronized关键字就使用此机制保证原子性。</p>
+<h2 id="2-3-互斥同步和非阻塞同步"><a href="#2-3-互斥同步和非阻塞同步" class="headerlink" title="2.3 互斥同步和非阻塞同步"></a>2.3 互斥同步和非阻塞同步</h2><p>使用asynchronized关键字是一种互斥同步机制，被锁住的资源无法被其它线程获取，其它线程只能阻塞在被锁住的资源上，等资源可用时再被唤醒。线程状态的改变需要从用户态切换到内核态，调用操作系统内核程序完成状态切换，会产生较大的资源开销。</p>
+<p>还有一种非阻塞同步机制，无需挂起线程，无需切换到内核态，即可保证线程间的同步。这是使用CPU的原子操作<code>比较并交换（Compare-And-Swap, CAS）</code>来实现的。</p>
+<p>我们以AtomicInteger为例来简要介绍：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> AtomicInteger race = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个线程同时执行</span></span><br><span class="line">race.incrementAndGet();</span><br></pre></td></tr></table></figure>
+<p>AtomicInteger的incrementAndGet方法的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">incrementAndGet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">        <span class="keyword">int</span> current = get();</span><br><span class="line">        <span class="keyword">int</span> next = current + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (compareAndSet(current, next))</span><br><span class="line">            <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AtomicInteger的incrementAndGet方法使用CAS指令（原子操作）判断AtomicInteger的当前值和current是否一致，如果一致就把它改变为next值；如果不一致就重新取值判断。由于CAS指令的原子性，所有在多线程中，AtomicInteger值的改变都是正确的。</p>
+<p>非阻塞同步由于无需进行CPU状态切换，效率会提高很多。</p>
+<h1 id="3-java内存区域"><a href="#3-java内存区域" class="headerlink" title="3. java内存区域"></a>3. java内存区域</h1><p>简要介绍JVM中的各种内存区域。请参考<a href="http://www.importnew.com/14086.html" target="_blank" rel="noopener">Java内存与垃圾回收调优</a></p>
 
       
     </div>
@@ -398,7 +411,9 @@
           
             <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/rmi/" rel="tag"># rmi</a>
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+            <a href="/tags/内存/" rel="tag"># 内存</a>
           
         </div>
       
@@ -411,14 +426,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/09/ISO-8859-1编码/" rel="next" title="ISO-8859-1编码">
+                <i class="fa fa-chevron-left"></i> ISO-8859-1编码
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/09/ISO-8859-1编码/" rel="prev" title="ISO-8859-1编码">
-                ISO-8859-1编码 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/24/DMZ区的机制/" rel="prev" title="DMZ区的机制">
+                DMZ区的机制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-定义远程接口"><span class="nav-text">1. 定义远程接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-服务端的实现"><span class="nav-text">2. 服务端的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-实现IHello接口"><span class="nav-text">2.1 实现IHello接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-实现服务器"><span class="nav-text">2.2 实现服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-客户端实现"><span class="nav-text">3. 客户端实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-部署和启动"><span class="nav-text">4. 部署和启动</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简述"><span class="nav-text">1. 简述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-JVM内存模型-–-线程角度"><span class="nav-text">2. JVM内存模型 – 线程角度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-主内存与工作内存的交互以及volatile关键字"><span class="nav-text">2.1 主内存与工作内存的交互以及volatile关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-原子操作和asynchronized关键字"><span class="nav-text">2.2 原子操作和asynchronized关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-互斥同步和非阻塞同步"><span class="nav-text">2.3 互斥同步和非阻塞同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-java内存区域"><span class="nav-text">3. java内存区域</span></a></li></ol></div>
             
 
           </div>
