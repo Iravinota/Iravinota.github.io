@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="网络," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="DMZ全称是(demilitarized zone)，原意是指两国之间划定的一块区域，双方均不可在此地设置武装力量。在网络中，通过在内网和外网之间设置一个DMZ区，对内网实现更好地保护功能。">
+<meta name="keywords" content="网络">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DMZ区的机制">
 <meta property="og:url" content="http://iravinota.github.io/2018/02/24/DMZ区的机制/index.html">
 <meta property="og:site_name" content="StepForward">
+<meta property="og:description" content="DMZ全称是(demilitarized zone)，原意是指两国之间划定的一块区域，双方均不可在此地设置武装力量。在网络中，通过在内网和外网之间设置一个DMZ区，对内网实现更好地保护功能。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-24T07:38:54.762Z">
+<meta property="og:updated_time" content="2018-02-28T06:21:38.445Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DMZ区的机制">
+<meta name="twitter:description" content="DMZ全称是(demilitarized zone)，原意是指两国之间划定的一块区域，双方均不可在此地设置武装力量。在网络中，通过在内网和外网之间设置一个DMZ区，对内网实现更好地保护功能。">
 
 
 
@@ -289,8 +293,42 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/24/DMZ区的机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/02/24/DMZ区的机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
             
           
 
@@ -327,7 +365,14 @@
       
 
       
-        
+        <p>DMZ全称是(demilitarized zone)，原意是指两国之间划定的一块区域，双方均不可在此地设置武装力量。在网络中，通过在内网和外网之间设置一个DMZ区，对内网实现更好地保护功能。</p>
+<a id="more"></a>
+<h1 id="1-DMZ区的设置"><a href="#1-DMZ区的设置" class="headerlink" title="1. DMZ区的设置"></a>1. DMZ区的设置</h1><p>外网  |   DMZ   |  内网</p>
+<p>这是设置DMZ区的方式，各个区域之间使用防火墙隔离。外网可以访问DMZ区，DMZ区可以访问外网，内网也可以访问DMZ区，但是DMZ区不能访问内网（或有限度的访问内网）。</p>
+<p>DMZ区中一般放置需要让外网访问的资源，如邮件服务器等。这样即使DMZ区被攻陷，攻击者也无法访问内网，保证了内网的安全。</p>
+<h1 id="2-一些未解决问题"><a href="#2-一些未解决问题" class="headerlink" title="2. 一些未解决问题"></a>2. 一些未解决问题</h1><h2 id="2-1-如果DMZ区的数据需要访问内网内容，怎么办？"><a href="#2-1-如果DMZ区的数据需要访问内网内容，怎么办？" class="headerlink" title="2.1 如果DMZ区的数据需要访问内网内容，怎么办？"></a>2.1 如果DMZ区的数据需要访问内网内容，怎么办？</h2><p>在这种情况下，应该是DMZ区能够有限度的访问内网资源。或是内网主动向DMZ区的机器建立连接，DMZ使用此连接和内网进行通信，而无法主动向内网建立连接。</p>
+<p>不过这样，内网的安全性将极大降低。</p>
+
       
     </div>
     
@@ -341,6 +386,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络/" rel="tag"># 网络</a>
+          
+        </div>
       
 
       
@@ -389,6 +440,11 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+
+  
 
 
 
@@ -411,8 +467,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -449,7 +514,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -472,6 +537,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-DMZ区的设置"><span class="nav-text">1. DMZ区的设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-一些未解决问题"><span class="nav-text">2. 一些未解决问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-如果DMZ区的数据需要访问内网内容，怎么办？"><span class="nav-text">2.1 如果DMZ区的数据需要访问内网内容，怎么办？</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -634,17 +715,31 @@
 
 	
 
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 101196, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 101196, xid: "2018/02/24/DMZ区的机制/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/101196/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
 
 
 
 
-  
-
-
-
-
-
-  
 
 
 
@@ -782,6 +877,9 @@
   
 
   
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.4"></script>
+
 
   
 
